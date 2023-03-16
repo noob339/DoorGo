@@ -5,31 +5,27 @@ import {
   TouchableOpacity,
   Platform,
   Pressable,
-  TouchableHighlight
-} from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
-import React, {useState} from 'react';
-import * as Linking from 'expo-linking';
-import { Entypo } from '@expo/vector-icons'; 
-
-
+  TouchableHighlight,
+} from "react-native";
+import { TextInput } from "react-native-gesture-handler";
+import React, { useState } from "react";
+import * as Linking from "expo-linking";
+import { Entypo } from "@expo/vector-icons";
 
 const AppIntro = () => {
-
   const [text, setText] = useState<any>();
 
-  let location : String = `Javits Corner 34th and 11th ave, New York, NY`;
-  let longitude :number = 40.75594534; 
-  let latitude :number = -74.00206170;
+  let location: String = `Javits Corner 34th and 11th ave, New York, NY`;
+  let longitude: number = 40.75594534;
+  let latitude: number = -74.0020617;
 
-
-  const openAddressOnMap = (label :any, lon: number, lat :number) => {
+  const openAddressOnMap = (label: any, lon: number, lat: number) => {
     const scheme = Platform.select({
-      ios: 'maps:0,0?q=',
-      android: 'geo:0,0?q=',
+      ios: "maps:0,0?q=",
+      android: "geo:0,0?q=",
     });
-    const lonLat :any = `${lon},${lat}`;
-    const url :any = Platform.select({
+    const lonLat: any = `${lon},${lat}`;
+    const url: any = Platform.select({
       ios: `${scheme}${label}@${lonLat}`,
       android: `${scheme}${lonLat}(${label})`,
     });
@@ -37,32 +33,24 @@ const AppIntro = () => {
     Linking.openURL(`https://maps.google.com/?q=${lon},${lat}`); //google maps
   };
 
-
-
   return (
     <View>
-      <Text
-        style={styles.title}
-        accessibilityHint='Where would you like to go'
-      > 
+      <Text style={styles.title} accessibilityHint="Where would you like to go">
         Where would you like to go?
       </Text>
 
       <TextInput
-        placeholder='Ex: 199 Chambers St'
+        placeholder="Ex: 199 Chambers St"
         value={text}
         onChangeText={setText}
         style={styles.inputText}
       />
 
-      <TouchableOpacity 
+      <TouchableOpacity
         style={styles.button}
         onPress={() => openAddressOnMap(location, longitude, latitude)}
       >
-        <Text
-        style={styles.buttonText}
-        accessibilityHint='button to speak'
-        >
+        <Text style={styles.buttonText} accessibilityHint="button to speak">
           Locate
         </Text>
       </TouchableOpacity>
@@ -72,28 +60,25 @@ const AppIntro = () => {
           <Entypo style={styles.micIcon} name="mic" size={24} color="#ffffff" />
         </View>
       </TouchableHighlight>
-
-
     </View>
-  )
-}
-
+  );
+};
 
 const styles = StyleSheet.create({
   introContainer: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   title: {
     fontSize: 40,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     paddingBottom: 10,
-    textAlign: 'center',
+    textAlign: "center",
   },
 
   inputText: {
     borderRadius: 5,
     borderWidth: 2,
-    borderColor: '#000000',
+    borderColor: "#000000",
     height: 45,
     bottom: -30,
   },
@@ -127,19 +112,17 @@ const styles = StyleSheet.create({
     width: 80,
     height: 50,
     borderRadius: 5,
-    alignSelf: 'center',
+    alignSelf: "center",
     bottom: -120,
     marginBottom: 20,
     position: "absolute",
     left: 310,
-
   },
 
   micIcon: {
     left: 25,
     bottom: -15,
   },
-
 });
 
 export default AppIntro;
