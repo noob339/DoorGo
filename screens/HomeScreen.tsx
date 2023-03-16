@@ -12,10 +12,6 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <AppIntro />
       <View style={styles.separator} />
-      <Button
-        title='Button: Take a photo for an entrance'
-        onPress={() => doAlert()}
-      />
     </View>
   );
 }
